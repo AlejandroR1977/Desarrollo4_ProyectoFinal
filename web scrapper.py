@@ -2,9 +2,12 @@ import json
 import os
 import time
 import requests
+from flask import Flask, jsonify, render_template
 from bs4 import BeautifulSoup
 
-# Cargar revistas desde el archivo anterior
+app = Flask(__name__)
+
+# Rutas de los archivos JSON
 ruta_json = 'datos/json'
 archivo_revistas = os.path.join(ruta_json, 'revistas.json')
 archivo_revistas_completas = os.path.join(ruta_json, 'revistas_completas.json')
@@ -102,20 +105,37 @@ def buscar_info_scimago(nombre_revista):
 
     return datos
 
-# Recorremos cada revista
-for revista in revistas:
-    if revista in revistas_completas:
-        print(f"{revista} ya está en el catálogo completo, se omite.")
-        continue
+@app.route('/')
+def index():
+    return render_template('index.html', revistas_completas=revistas_completas)
 
-    info = buscar_info_scimago(revista)
-    if info:
-        revistas_completas[revista] = info
-        # Guardar inmediatamente para no perder avances
-        with open(archivo_revistas_completas, 'w', encoding='utf-8') as f:
-            json.dump(revistas_completas, f, indent=4, ensure_ascii=False)
+@app.route('/scrape', methods=['GET'])
+def scrape():
+    """
+    Endpoint que inicia el proceso de scraping de revistas.
+    """
+    global revistas_completas
+
+    for revista in revistas:
+        if revista in revistas_completas:
+            print(f"{revista} ya está en el catálogo completo, se omite.")
+            continue
+
+        info = buscar_info_scimago(revista)
+        if info:
+            revistas_completas[revista] = info
+            # Guardar inmediatamente para no perder avances
+            with open(archivo_revistas_completas, 'w', encoding='utf-8') as f:
+                json.dump(revistas_completas, f, indent=4, ensure_ascii=False)
+        
+        # Respetar al servidor
+        time.sleep(2)
+
+    return jsonify({"status": "Proceso terminado", "revistas_completas": list(revistas_completas.keys())})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
     
-    # Respetar al servidor
-    time.sleep(2)
 
-print("Proceso terminado.")
+
