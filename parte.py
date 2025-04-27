@@ -8,7 +8,7 @@ ruta_areas = os.path.join(ruta_base, 'areas')
 ruta_catalogos = os.path.join(ruta_base, 'catalogos')
 ruta_json = 'datos/json'
 
-# Diccionario final
+# Diccionario final, aca se utilizo chatgpt
 revistas = {
   '4or': {'areas': ['CIENCIASECO', 'CIENCIASEXA'], 'catalogos': ['SCOPUS']},
   'abacus': {'areas': ['CIENCIASECO'], 'catalogos': ['SCOPUS']},
