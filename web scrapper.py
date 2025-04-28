@@ -2,15 +2,16 @@ import json
 import os
 import time
 import requests
-from flask import Flask, jsonify, render_template
 from bs4 import BeautifulSoup
-
-app = Flask(__name__)
 
 # Rutas de los archivos JSON
 ruta_json = 'datos/json'
 archivo_revistas = os.path.join(ruta_json, 'revistas.json')
 archivo_revistas_completas = os.path.join(ruta_json, 'revistas_completas.json')
+
+# Cargar el archivo original de revistas
+with open(archivo_revistas, 'r', encoding='utf-8') as f:
+    revistas = json.load(f)
 
 # Verificamos si ya existe un catálogo completo previo
 if os.path.exists(archivo_revistas_completas):
@@ -19,11 +20,7 @@ if os.path.exists(archivo_revistas_completas):
 else:
     revistas_completas = {}
 
-# Cargar el archivo original
-with open(archivo_revistas, 'r', encoding='utf-8') as f:
-    revistas = json.load(f)
-
-# Función para buscar una revista en SCIMAGO
+# Función para buscar información en SCIMAGO
 def buscar_info_scimago(nombre_revista):
     print(f"Buscando {nombre_revista} en SCIMAGO...")
 
@@ -105,36 +102,29 @@ def buscar_info_scimago(nombre_revista):
 
     return datos
 
-@app.route('/')
-def index():
-    return render_template('index.html', revistas_completas=revistas_completas)
+# Scraping de revistas
+for revista in revistas:
+    if revista in revistas_completas:
+        print(f"{revista} ya está en el catálogo completo, se omite.")
+        continue
 
-@app.route('/scrape', methods=['GET'])
-def scrape():
-    """
-    Endpoint que inicia el proceso de scraping de revistas.
-    """
-    global revistas_completas
+    # Buscar información de la revista
+    info = buscar_info_scimago(revista)
+    if info:
+        revistas_completas[revista] = info
+        # Guardar inmediatamente para no perder avances
+        with open(archivo_revistas_completas, 'w', encoding='utf-8') as f:
+            json.dump(revistas_completas, f, indent=4, ensure_ascii=False)
+    
+    # Respetar al servidor
+    time.sleep(2)
 
-    for revista in revistas:
-        if revista in revistas_completas:
-            print(f"{revista} ya está en el catálogo completo, se omite.")
-            continue
+# Verificar que puede leerse correctamente
+with open(archivo_revistas_completas, 'r', encoding='utf-8') as f:
+    revistas_leidas = json.load(f)
+    print("JSON leído correctamente:")
+    print(json.dumps(revistas_leidas, indent=4, ensure_ascii=False))
 
-        info = buscar_info_scimago(revista)
-        if info:
-            revistas_completas[revista] = info
-            # Guardar inmediatamente para no perder avances
-            with open(archivo_revistas_completas, 'w', encoding='utf-8') as f:
-                json.dump(revistas_completas, f, indent=4, ensure_ascii=False)
-        
-        # Respetar al servidor
-        time.sleep(2)
-
-    return jsonify({"status": "Proceso terminado", "revistas_completas": list(revistas_completas.keys())})
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
     
 
