@@ -4,8 +4,6 @@ pip install pandas --user
 
 python.exe -m pip install --upgrade pip --user
 
-pip install selenium
-
 Meter desde la terminal del Visual Studio:
 
 pip install requests
