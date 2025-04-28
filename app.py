@@ -1,34 +1,22 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify, render_template
 import json
-import os
 
-app = Flask(__name__)
+app = Flask(_name_)
 
-# Rutas de los archivos JSON
-ruta_json = 'datos/json'
-archivo_revistas_completas = os.path.join(ruta_json, 'revistas_completas.json')
+# Ruta para obtener la información de todas las revistas
+@app.route('/revistas', methods=['GET'])
+def obtener_revistas():
+    try:
+        with open("datos/json/revistas_info.json", "r", encoding="utf-8") as file:
+            data = json.load(file)
+        return jsonify(data)  # Devuelve la información de las revistas en formato JSON
+    except FileNotFoundError:
+        return jsonify({"error": "No se encontraron datos."}), 404
 
-# Verificamos si ya existe un catálogo completo previo
-if os.path.exists(archivo_revistas_completas):
-    with open(archivo_revistas_completas, 'r', encoding='utf-8') as f:
-        revistas_completas = json.load(f)
-else:
-    revistas_completas = {}
-
+# Ruta para la página principal (interfaz de usuario)
 @app.route('/')
 def index():
-    """
-    Página principal que muestra la lista de revistas completas.
-    """
-    return render_template('index.html', revistas_completas=revistas_completas)
+    return render_template("index.html")  # Carga el archivo HTML
 
-@app.route('/scrape', methods=['GET'])
-def scrape():
-    """
-    Endpoint que devuelve un mensaje indicando que el scraping se ha completado.
-    Aquí podrías agregar la lógica para iniciar el scraping.
-    """
-    return jsonify({"status": "Proceso de scraping iniciado"})
-
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(debug=True)
