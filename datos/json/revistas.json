@@ -1,0 +1,194 @@
+{
+    "4or": {
+        "areas": [
+            "CIENCIASECO",
+            "CIENCIASEXA"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "abacus": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "academia": {
+        "areas": [
+            "CIENCIASECO",
+            "CIENCIASSOC"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "academia-revista latinoamericana de administracion": {
+        "areas": [
+            "CIENCIASECO",
+            "ING"
+        ],
+        "catalogos": [
+            "JCR"
+        ]
+    },
+    "academic leadership": {
+        "areas": [
+            "CIENCIASECO",
+            "CIENCIASSOC"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "academy of accounting and financial studies journal": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "academy of banking studies journal": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "academy of entrepreneurship journal": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "academy of management annals": {
+        "areas": [
+            "CIENCIASECO",
+            "ING"
+        ],
+        "catalogos": [
+            "JCR",
+            "SCOPUS"
+        ]
+    },
+    "academy of management journal": {
+        "areas": [
+            "CIENCIASECO",
+            "ING"
+        ],
+        "catalogos": [
+            "JCR",
+            "SCOPUS"
+        ]
+    },
+    "accounting and business research": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "accounting and finance": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "accounting and the public interest": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "accounting education": {
+        "areas": [
+            "CIENCIASECO",
+            "CIENCIASSOC"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "accounting forum": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "acta oeconomica": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "JCR",
+            "SCOPUS"
+        ]
+    },
+    "action learning: research and practice": {
+        "areas": [
+            "CIENCIASECO",
+            "CIENCIASSOC"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "action research": {
+        "areas": [
+            "CIENCIASECO",
+            "ING",
+            "CIENCIASSOC"
+        ],
+        "catalogos": [
+            "JCR",
+            "SCOPUS"
+        ]
+    },
+    "actual problems of economics": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "JCR",
+            "SCOPUS"
+        ]
+    },
+    "african development review-revue africaine de developpement": {
+        "areas": [
+            "CIENCIASECO",
+            "ING"
+        ],
+        "catalogos": [
+            "JCR"
+        ]
+    },
+    "african finance journal": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    },
+    "african journal of economic and management studies": {
+        "areas": [
+            "CIENCIASECO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ]
+    }
+}

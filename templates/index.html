@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Revistas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Catálogo de Revistas SCImago</h1>
+
+    <table id="tablaRevistas">
+        <thead>
+            <tr>
+                <th>Sitio Web</th>
+                <th>H-Index</th>
+                <th>Área y Categoría</th>
+                <th>Editor</th>
+                <th>ISSN</th>
+                <th>Widget</th>
+                <th>Tipo de Publicación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se llenarán aquí con JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Función para cargar las revistas desde la API
+        function cargarRevistas() {
+            fetch('/revistas')
+                .then(response => response.json())
+                .then(data => {
+                    const tablaRevistas = document.getElementById('tablaRevistas').getElementsByTagName('tbody')[0];
+                    data.forEach(revista => {
+                        const fila = tablaRevistas.insertRow();
+                        
+                        fila.insertCell(0).innerText = revista.sitio_web;
+                        fila.insertCell(1).innerText = revista.h_index;
+                        fila.insertCell(2).innerText = revista.subject_area;
+                        fila.insertCell(3).innerText = revista.publisher;
+                        fila.insertCell(4).innerText = revista.issn;
+                        fila.insertCell(5).innerText = revista.widget;
+                        fila.insertCell(6).innerText = revista.publication_type;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al cargar las revistas:', error);
+                });
+        }
+
+        // Cargar las revistas cuando la página esté lista
+        window.onload = cargarRevistas;
+    </script>
+
+</body>
+</html>
