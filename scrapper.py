@@ -1,98 +1,90 @@
-import requests
-from bs4 import BeautifulSoup
 import json
 import os
+import time
+import requests
+from bs4 import BeautifulSoup
 
-# Función para obtener los detalles de una revista desde SCImago
-def obtener_detalles_revista(url):
-    """
-    Realiza scraping de SCImago para obtener información de una revista.
-    """
-    response = requests.get(url)
-    if response.status_code != 200:
-        print(f"Error al obtener la página: {url}")
-        return None
-    
-    soup = BeautifulSoup(response.text, "html.parser")
-    
+input_json_path = 'datos/json/revistas.json'
+output_json_path = 'datos/json/scimago_data.json'
+
+# Cargar catálogo
+with open(input_json_path, 'r', encoding='utf-8') as f:
+    revistas = json.load(f)
+
+# Cargar información existente si ya fue guardada antes
+if os.path.exists(output_json_path):
+    with open(output_json_path, 'r', encoding='utf-8') as f:
+        datos_scrapeados = json.load(f)
+else:
+    datos_scrapeados = {}
+
+# Función para buscar la revista en SCImago
+def buscar_info_scimago(nombre_revista):
+    url_busqueda = f"https://www.scimagojr.com/journalsearch.php?q={nombre_revista.replace(' ', '+')}"
+    headers = {'User-Agent': 'Mozilla/5.0'}
+
     try:
-        # Extracción de los datos de la página de SCImago
-        sitio_web = soup.find("a", {"class": "external"})["href"]
-        h_index = soup.find("span", {"class": "h-index"}).text.strip()
-        subject_area = soup.find("span", {"class": "subject-area"}).text.strip()
-        publisher = soup.find("span", {"class": "publisher"}).text.strip()
-        issn = soup.find("span", {"class": "issn"}).text.strip()
-        widget = soup.find("div", {"class": "widget"}).text.strip()
-        publication_type = soup.find("span", {"class": "publication-type"}).text.strip()
+        r = requests.get(url_busqueda, headers=headers)
+        soup = BeautifulSoup(r.text, 'html.parser')
+        tabla = soup.find('div', class_='search_results')
+        if not tabla:
+            return None
 
-        # Crear el diccionario con la información extraída
-        return {
-            "sitio_web": sitio_web,
-            "h_index": h_index,
-            "subject_area": subject_area,
-            "publisher": publisher,
-            "issn": issn,
-            "widget": widget,
-            "publication_type": publication_type
+        primer_resultado = tabla.find('a', href=True)
+        if not primer_resultado:
+            return None
+
+        url_revista = "https://www.scimagojr.com/" + primer_resultado['href']
+        r = requests.get(url_revista, headers=headers)
+        soup = BeautifulSoup(r.text, 'html.parser')
+
+        def safe_find(label):
+            tag = soup.find(string=label)
+            return tag.find_next().text.strip() if tag else None
+
+        info = {
+            "url": url_revista,
+            "h_index": safe_find("H index"),
+            "subject_area": None,
+            "publisher": safe_find("Publisher"),
+            "issn": safe_find("ISSN"),
+            "widget": None,
+            "publication_type": safe_find("Type")
         }
-    except AttributeError as e:
-        print(f"Error al extraer información de la revista: {url}")
+
+        # Subject area
+        try:
+            info["subject_area"] = soup.find('div', class_='journaldescription').find_all('span')[1].text.strip()
+        except:
+            pass
+
+        # Widget iframe
+        try:
+            info["widget"] = soup.find('iframe')['src']
+        except:
+            pass
+
+        return info
+    except Exception as e:
+        print(f"Error con {nombre_revista}: {e}")
         return None
 
-# Función para verificar si la revista ya está en el JSON
-def revista_existente(issn, archivo_json):
-    """
-    Verifica si la revista ya ha sido procesada, buscando su ISSN.
-    """
-    if os.path.exists(archivo_json):
-        with open(archivo_json, "r", encoding="utf-8") as file:
-            data = json.load(file)
-            for revista in data:
-                if revista["issn"] == issn:
-                    return True
-    return False
 
-# Función para guardar la información en un archivo JSON
-def guardar_en_json(archivo_json, data):
-    """
-    Guarda los datos recopilados en un archivo JSON.
-    """
-    with open(archivo_json, "w", encoding="utf-8") as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
+# Scraping
+for revista in revistas:
+    if revista in datos_scrapeados:
+        continue
+    print(f"Buscando información de: {revista}")
+    info = buscar_info_scimago(revista)
+    if info:
+        datos_scrapeados[revista] = info
+        time.sleep(3)  # Evitar sobrecargar el sitio
 
-# Función para obtener información de las revistas desde el archivo JSON
-def obtener_info_revistas(json_input, archivo_json_salida):
-    """
-    Lee el archivo JSON de revistas y obtiene información de SCImago.
-    """
-    data_revisadas = []
+# Guardar nuevo JSON
+with open(output_json_path, 'w', encoding='utf-8') as f:
+    json.dump(datos_scrapeados, f, indent=4, ensure_ascii=False)
 
-    # Leer el archivo JSON con el catálogo de revistas
-    with open(json_input, "r", encoding="utf-8") as file:
-        catalogo_revistas = json.load(file)
 
-    for revista, info in catalogo_revistas.items():
-        # Si la revista ya está procesada, no la volvemos a consultar
-        issn = info["catalogos"]  # Asumimos que la clave ISSN está en catalogos
-        if revista_existente(issn, archivo_json_salida):
-            print(f"Revista {revista} ya está procesada.")
-            continue
-        
-        # Obtener los detalles de la revista
-        url = f"https://www.scimagojr.com/journalrank.php?journal_id={revista}"  # URL de SCImago, ajustada según sea necesario
-        detalles = obtener_detalles_revista(url)
-
-        if detalles:
-            data_revisadas.append(detalles)
-            print(f"Revista {revista} procesada.")
-        
-        # Guardar los detalles en el archivo JSON
-        guardar_en_json(archivo_json_salida, data_revisadas)
-
-# Ejecutar el scraper para obtener la información de las revistas
-archivo_json_catalogo = 'datos/json/revistas.json'  # Archivo de entrada con los catálogos
-archivo_json_salida = 'datos/json/revistas_info.json'  # Archivo de salida con la información extraída
-obtener_info_revistas(archivo_json_catalogo, archivo_json_salida)
 
     
 
