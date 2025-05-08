@@ -1,191 +1,250 @@
 {
     "4or": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=145295&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "48",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Management Information Systems",
+            "Computer Science",
+            "Computational Theory and Mathematics",
+            "Decision Sciences",
+            "Management Science and Operations Research",
+            "Mathematics",
+            "Theoretical Computer Science"
+        ],
         "publisher": "Springer",
         "issn": "16142411, 16194500",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "abacus": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=100147335&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "56",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Accounting"
+        ],
         "publisher": "Wiley-Blackwell Publishing Ltd",
         "issn": "00013072, 14676281",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "academia": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=14614&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "108",
+        "subject_area": [
+            "Earth and Planetary Sciences",
+            "Geology",
+            "Geotechnical Engineering and Engineering Geology",
+            "Engineering",
+            "Civil and Structural Engineering"
+        ],
         "publisher": "Academia Sinica\n\n Academia Sinica in Scimago Institutions Rankings",
         "issn": "10006915",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "academia-revista latinoamericana de administracion": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=19700173246&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "24",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Business and International Management",
+            "Organizational Behavior and Human Resource Management",
+            "Strategy and Management",
+            "Decision Sciences",
+            "Management Science and Operations Research",
+            "Economics, Econometrics and Finance",
+            "Economics, Econometrics and Finance (miscellaneous)",
+            "Social Sciences",
+            "Education",
+            "Public Administration"
+        ],
         "publisher": "Emerald Group Publishing Ltd.",
         "issn": "10128255, 20565127",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "academic leadership": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=16400154731&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "57",
+        "subject_area": [
+            "Arts and Humanities",
+            "Arts and Humanities (miscellaneous)",
+            "Business, Management and Accounting",
+            "Strategy and Management",
+            "Social Sciences",
+            "Education"
+        ],
         "publisher": "Brill Academic Publishers",
         "issn": "13632434, 13642626",
         "widget": null,
-        "publication_type": null
-    },
-    "academy of accounting and financial studies journal": {
-        "url": "https://www.scimagojr.com/journalsearch.php?q=19300157018&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
-        "publisher": "Allied Academies",
-        "issn": "10963685, 15282635",
-        "widget": null,
-        "publication_type": null
-    },
-    "academy of banking studies journal": {
-        "url": "https://www.scimagojr.com/journalsearch.php?q=19700175173&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
-        "publisher": "Allied Academies",
-        "issn": "19392230, 19392249",
-        "widget": null,
-        "publication_type": null
-    },
-    "academy of entrepreneurship journal": {
-        "url": "https://www.scimagojr.com/journalsearch.php?q=19700175174&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
-        "publisher": "Allied Academies",
-        "issn": "10879595, 15282686",
-        "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "academy of management annals": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=19900191906&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "119",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Business and International Management",
+            "Organizational Behavior and Human Resource Management"
+        ],
         "publisher": "Academy of Management",
         "issn": "19416067, 19416520",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "academy of management journal": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=20191&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "396",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Business and International Management",
+            "Business, Management and Accounting (miscellaneous)",
+            "Management of Technology and Innovation",
+            "Strategy and Management"
+        ],
         "publisher": "Academy of Management",
         "issn": "00014273",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "accounting and business research": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=28034&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "73",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Accounting",
+            "Economics, Econometrics and Finance",
+            "Finance"
+        ],
         "publisher": "Routledge",
         "issn": "00014788, 21594260",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "accounting and finance": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=100147313&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "96",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Accounting",
+            "Business, Management and Accounting (miscellaneous)",
+            "Economics, Econometrics and Finance",
+            "Finance"
+        ],
         "publisher": "Wiley-Blackwell Publishing Ltd",
         "issn": "0306686X, 14685957",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "accounting and the public interest": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=19900193215&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "14",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Accounting"
+        ],
         "publisher": "American Accounting Association",
         "issn": "15309320",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "accounting education": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=19700188267&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "54",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Accounting",
+            "Social Sciences",
+            "Education"
+        ],
         "publisher": "Routledge",
         "issn": "09639284, 14684489",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "accounting forum": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=145078&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "66",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Accounting",
+            "Economics, Econometrics and Finance",
+            "Finance"
+        ],
         "publisher": "Taylor and Francis Ltd.",
         "issn": "01559982, 14676303",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "acta oeconomica": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=18217&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "21",
+        "subject_area": [
+            "Economics, Econometrics and Finance",
+            "Economics and Econometrics",
+            "Social Sciences",
+            "Geography, Planning and Development",
+            "Political Science and International Relations",
+            "Sociology and Political Science"
+        ],
         "publisher": "Akademiai Kiado ZRt.",
         "issn": "00016373, 15882659",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "action learning: research and practice": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=19700201168&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "15",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Business, Management and Accounting (miscellaneous)",
+            "Social Sciences",
+            "Education"
+        ],
         "publisher": "Taylor and Francis Ltd.",
         "issn": "14767333, 14767341",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "action research": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=29068&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "136",
+        "subject_area": [
+            "Physics and Astronomy",
+            "Instrumentation",
+            "Nuclear and High Energy Physics"
+        ],
         "publisher": "Elsevier B.V.",
         "issn": "0168583X",
         "widget": null,
-        "publication_type": null
-    },
-    "actual problems of economics": {
-        "url": "https://www.scimagojr.com/journalsearch.php?q=19700167903&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
-        "publisher": "National Academy of Management",
-        "issn": "19936788",
-        "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "african finance journal": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=21100258758&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "7",
+        "subject_area": [
+            "Economics, Econometrics and Finance",
+            "Finance"
+        ],
         "publisher": "University of Stellenbosch\n\n Stellenbosch University in Scimago Institutions Rankings",
         "issn": "16059786",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     },
     "african journal of economic and management studies": {
         "url": "https://www.scimagojr.com/journalsearch.php?q=21100376830&tip=sid&clean=0",
-        "h_index": null,
-        "subject_area": null,
+        "h_index": "31",
+        "subject_area": [
+            "Business, Management and Accounting",
+            "Business, Management and Accounting (miscellaneous)",
+            "Economics, Econometrics and Finance",
+            "Economics, Econometrics and Finance (miscellaneous)"
+        ],
         "publisher": "Emerald Group Publishing Ltd.",
         "issn": "20400705, 20400713",
         "widget": null,
-        "publication_type": null
+        "publication_type": "Journals"
     }
 }

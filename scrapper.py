@@ -11,7 +11,7 @@ output_json_path = 'datos/json/scimago_data.json'
 with open(input_json_path, 'r', encoding='utf-8') as f:
     revistas = json.load(f)
 
-# Cargar información existente si ya fue guardada antes
+# Cargar información existente
 if os.path.exists(output_json_path):
     with open(output_json_path, 'r', encoding='utf-8') as f:
         datos_scrapeados = json.load(f)
@@ -38,29 +38,56 @@ def buscar_info_scimago(nombre_revista):
         r = requests.get(url_revista, headers=headers)
         soup = BeautifulSoup(r.text, 'html.parser')
 
+        info = {
+            "url": url_revista,
+            "h_index": None,
+            "subject_area": [],
+            "publisher": None,
+            "issn": None,
+            "widget": None,
+            "publication_type": None
+        }
+
+        # Extraer H-Index
+        try:
+            h_index_tag = soup.find_all('p', class_='hindexnumber')[1]
+            info["h_index"] = h_index_tag.text.strip()
+        except Exception as e:
+            print(f"Error extrayendo H-Index de {nombre_revista}: {e}")
+
+        # Función auxiliar
         def safe_find(label):
             tag = soup.find(string=label)
             return tag.find_next().text.strip() if tag else None
 
-        info = {
-            "url": url_revista,
-            "h_index": safe_find("H index"),
-            "subject_area": None,
-            "publisher": safe_find("Publisher"),
-            "issn": safe_find("ISSN"),
-            "widget": None,
-            "publication_type": safe_find("Type")
-        }
+        info["publisher"] = safe_find("Publisher")
+        info["issn"] = safe_find("ISSN")
 
-        # Subject area
+        # Extraer publicación type
         try:
-            info["subject_area"] = soup.find('div', class_='journaldescription').find_all('span')[1].text.strip()
+            pub_type_tag = soup.find('h2', string="Publication type")
+            if pub_type_tag:
+                info["publication_type"] = pub_type_tag.find_next('p').text.strip()
         except:
             pass
 
-        # Widget iframe
+        # Extraer área temática (subject areas y categorías)
         try:
-            info["widget"] = soup.find('iframe')['src']
+            subject_areas = []
+            subject_section = soup.find('h2', string="Subject Area and Category")
+            if subject_section:
+                div = subject_section.find_parent('div')
+                for a in div.find_all('a'):
+                    subject_areas.append(a.text.strip())
+            info["subject_area"] = subject_areas
+        except Exception as e:
+            print(f"Error extrayendo subject_area de {nombre_revista}: {e}")
+
+        # Extraer widget (en value de input con id embed_code)
+        try:
+            input_tag = soup.find('input', {'id': 'embed_code'})
+            if input_tag and input_tag.has_attr('value'):
+                info["widget"] = input_tag['value']
         except:
             pass
 
@@ -68,7 +95,6 @@ def buscar_info_scimago(nombre_revista):
     except Exception as e:
         print(f"Error con {nombre_revista}: {e}")
         return None
-
 
 # Scraping
 for revista in revistas:
@@ -78,7 +104,7 @@ for revista in revistas:
     info = buscar_info_scimago(revista)
     if info:
         datos_scrapeados[revista] = info
-        time.sleep(3)  # Evitar sobrecargar el sitio
+    time.sleep(3)
 
 # Guardar nuevo JSON
 with open(output_json_path, 'w', encoding='utf-8') as f:

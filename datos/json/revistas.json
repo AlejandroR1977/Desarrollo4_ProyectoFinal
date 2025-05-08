@@ -43,30 +43,6 @@
             "SCOPUS"
         ]
     },
-    "academy of accounting and financial studies journal": {
-        "areas": [
-            "CIENCIASECO"
-        ],
-        "catalogos": [
-            "SCOPUS"
-        ]
-    },
-    "academy of banking studies journal": {
-        "areas": [
-            "CIENCIASECO"
-        ],
-        "catalogos": [
-            "SCOPUS"
-        ]
-    },
-    "academy of entrepreneurship journal": {
-        "areas": [
-            "CIENCIASECO"
-        ],
-        "catalogos": [
-            "SCOPUS"
-        ]
-    },
     "academy of management annals": {
         "areas": [
             "CIENCIASECO",
@@ -151,15 +127,6 @@
             "CIENCIASECO",
             "ING",
             "CIENCIASSOC"
-        ],
-        "catalogos": [
-            "JCR",
-            "SCOPUS"
-        ]
-    },
-    "actual problems of economics": {
-        "areas": [
-            "CIENCIASECO"
         ],
         "catalogos": [
             "JCR",
