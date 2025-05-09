@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 import json
-<<<<<<< HEAD
 import os
 from flask_session import Session
 from flask import session, redirect, url_for, flash
@@ -67,24 +66,10 @@ def index():
         return redirect(url_for('login'))
     return render_template('index.html')
 
-
-=======
-
-app = Flask(__name__)
-
-with open('datos/scimago_data.json', encoding='utf-8') as f:
-    revistas = json.load(f)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
->>>>>>> bcf605a6a8798875833f0d1bc0061a5faa86c548
 @app.route('/explorar')
 def explorar():
     return render_template('explorar.html', revistas=revistas)
 
-<<<<<<< HEAD
 @app.route('/busqueda', methods=['GET', 'POST'])
 def busqueda():
     query = request.args.get('query', '').strip().lower()
@@ -116,17 +101,6 @@ def catalogo_detalle(catalogo):
         if catalogo == data.get("publisher", "Desconocido")
     ]
     return render_template('catalogos.html', catalogo=catalogo, resultados=resultados)
-=======
-@app.route('/buscar')
-def buscar():
-    query = request.args.get('q', '').lower()
-    resultados = [r for r in revistas if query in r['title'].lower()]
-    return render_template('buscar.html', resultados=resultados, query=query)
-
-@app.route('/catalogos')
-def catalogos():
-    return render_template('catalogos.html')
->>>>>>> bcf605a6a8798875833f0d1bc0061a5faa86c548
 
 @app.route('/area')
 def area():
