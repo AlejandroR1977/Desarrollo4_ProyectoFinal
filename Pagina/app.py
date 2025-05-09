@@ -115,10 +115,28 @@ def catalogo_detalle(catalogo):
     return render_template('catalogos.html', catalogo=catalogo, resultados=resultados, catalogos=catalogos)
 
 # Ruta de áreas
-@app.route('/area')
+@app.route('/area', methods=['GET'])
 def area():
     areas = obtener_areas()
-    return render_template('area.html', areas=areas)
+    area_seleccionada = None
+    revistas = []
+
+    if 'area' in request.args:
+        area_id = request.args['area']
+        area_seleccionada = area_id
+        # Filtra las revistas que pertenecen al área seleccionada
+        revistas = [
+            {
+                "id": idx,
+                "titulo": titulo,
+                "h_index": data.get("h_index", "N/A"),
+                "url": data.get("url", "#")
+            }
+            for idx, (titulo, data) in enumerate(scimago_data.items())
+            if area_id in data.get("subject_area", [])
+        ]
+    
+    return render_template('area.html', areas=areas, area_seleccionada=area_seleccionada, revistas=revistas)
 
 @app.route('/area/<area_nombre>')
 def area_detalle(area_nombre):
@@ -135,11 +153,11 @@ def area_detalle(area_nombre):
     areas = obtener_areas()
     return render_template('area.html', area_nombre=area_nombre, resultados=resultados, areas=areas)
 
-
 # Ruta de créditos
 @app.route('/creditos')
 def creditos():
     return render_template('creditos.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
