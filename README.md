@@ -19,3 +19,5 @@ pip install requests beautifulsoup4
 pip install flask
 
 python -m pip install flask
+
+pip install Flask-Session
