@@ -4,56 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créditos</title>
+    <!-- Enlace a Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #003366; /* Azul oscuro */
+        }
+
+        .navbar-brand {
+            color: #FFD700 !important; /* Amarillo */
+        }
+
+        .navbar-nav .nav-link {
+            color: #FFD700 !important; /* Amarillo para los enlaces */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #FFFFFF !important; /* Blanco al pasar el cursor */
+            background-color: #005B99; /* Azul claro */
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        h1 {
+            color: #003366; /* Azul oscuro */
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            color: #333;
+        }
+
+        .table {
+            margin-top: 30px;
+            border: 1px solid #ddd;
+        }
+
+        .thead-light {
+            background-color: #FFD700; /* Amarillo */
+            color: #003366; /* Azul oscuro */
+        }
+
         .credencial-img {
             width: 80px;
             height: 100px;
             object-fit: cover;
-            border: 1px solid #ccc;
+            border: 2px solid #003366; /* Borde azul */
             border-radius: 5px;
+        }
+
+        .footer {
+            background-color: #003366; /* Azul oscuro */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-                <img src="logo_unison.png" alt="Logo Unison" width="40" height="40" class="d-inline-block align-top"> Universidad de Sonora
-            </a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/area">Área</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/catalogos">Catálogos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/explorar">Explorar</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/busqueda">Búsqueda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/creditos">Créditos</a></li>
-                </ul>
-            </div>
-        </nav>
 
-        <h1 class="my-4">Créditos del Proyecto</h1>
-        <p>Este proyecto fue desarrollado por los estudiantes de la Universidad de Sonora como parte de su curso de Desarrollo Web.</p>
-
-        <table class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Foto tipo credencial</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Josué</td>
-                    <td><img src="/static/fotos/Josue_foto.jpg" alt="Foto de Josué" class="credencial-img"></td>
-                </tr>
-                <tr>
-                    <td>Alejandro</td>
-                    <td><img src="/static/fotos/Alejandro_foto.png" alt="Foto de Alejandro" class="credencial-img"></td>
-                </tr>
-            </tbody>
-        </table>
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+        <img src="static/logo_unison.png" alt="Logo Unison" width="40" height="40" class="d-inline-block align-top">
+        Universidad de Sonora
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="/area">Área</a></li>
+            <li class="nav-item"><a class="nav-link" href="/catalogos">Catálogos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/explorar">Explorar</a></li>
+            <li class="nav-item"><a class="nav-link" href="/busqueda">Búsqueda</a></li>
+            <li class="nav-item"><a class="nav-link" href="/creditos">Créditos</a></li>
+        </ul>
     </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="container">
+    <h1>Créditos del Proyecto</h1>
+    <p>Este proyecto fue desarrollado por los estudiantes de la Universidad de Sonora como parte de su curso de Desarrollo Web. Nos complace presentar esta plataforma donde se pueden explorar y descubrir revistas científicas, al mismo tiempo que se destaca la participación activa de los estudiantes en su creación.</p>
+
+    <!-- Tabla de créditos -->
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>Nombre</th>
+                <th>Foto tipo credencial</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Josué</td>
+                <td><img src="{{ url_for('static', filename='fotos/Josue_foto.jpg') }}" alt="Foto de Josué" class="credencial-img"></td>
+            </tr>
+            <tr>
+                <td>Alejandro</td>
+                <td><img src="{{ url_for('static', filename='fotos/Alejandro_foto.png') }}" alt="Foto de Alejandro" class="credencial-img"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2025 Universidad de Sonora. Todos los derechos reservados.</p>
+</div>
+
+<!-- Scripts de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
