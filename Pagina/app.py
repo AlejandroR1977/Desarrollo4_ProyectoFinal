@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask_session import Session
 import json
 import os
-from flask_session import Session
-from flask import session, redirect, url_for, flash
 
 app = Flask(__name__)
 
@@ -11,23 +10,25 @@ app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-# Datos ficticios de usuarios (en un entorno real, esto iría en una base de datos)
+# Datos ficticios de usuarios
 USUARIOS = {
     "admin": "1234",
     "user1": "password1",
     "user2": "password2"
 }
 
+# Cargar datos de revistas
 with open('../datos/json/scimago_data.json', encoding='utf-8') as f:
-    revistas = json.load(f)
+    scimago_data = json.load(f)
 
-# Obtener áreas y catálogos únicas
+# Obtener áreas únicas
 def obtener_areas():
     areas = set()
     for revista in scimago_data.values():
         areas.update(revista.get("subject_area", []))
     return sorted(areas)
 
+# Obtener catálogos únicos
 def obtener_catalogos():
     catalogos = set()
     for revista in scimago_data.values():
@@ -59,6 +60,7 @@ def logout():
     flash('Sesión cerrada correctamente', 'success')
     return redirect(url_for('login'))
 
+# Ruta principal
 @app.route('/')
 def index():
     if 'usuario' not in session:
@@ -66,11 +68,13 @@ def index():
         return redirect(url_for('login'))
     return render_template('index.html')
 
+# Ruta de exploración
 @app.route('/explorar')
 def explorar():
-    return render_template('explorar.html', revistas=revistas)
+    return render_template('explorar.html', revistas=scimago_data)
 
-@app.route('/busqueda', methods=['GET', 'POST'])
+# Ruta de búsqueda
+@app.route('/busqueda', methods=['GET'])
 def busqueda():
     query = request.args.get('query', '').strip().lower()
     resultados = []
@@ -88,24 +92,51 @@ def busqueda():
 
     return render_template('busqueda.html', query=query, resultados=resultados)
 
+# Ruta de catálogos generales
 @app.route('/catalogos')
 def catalogos_view():
     catalogos = obtener_catalogos()
     return render_template('catalogos.html', catalogos=catalogos)
 
+# Ruta de catálogo específico
 @app.route('/catalogos/<catalogo>')
 def catalogo_detalle(catalogo):
     resultados = [
-        {"titulo": titulo, "h_index": data["h_index"], "url": data["url"]}
-        for titulo, data in scimago_data.items()
+        {
+            "id": idx,
+            "titulo": titulo,
+            "h_index": data.get("h_index", "N/A"),
+            "url": data.get("url", "#")
+        }
+        for idx, (titulo, data) in enumerate(scimago_data.items())
         if catalogo == data.get("publisher", "Desconocido")
     ]
-    return render_template('catalogos.html', catalogo=catalogo, resultados=resultados)
+    catalogos = obtener_catalogos()
+    return render_template('catalogos.html', catalogo=catalogo, resultados=resultados, catalogos=catalogos)
 
+# Ruta de áreas
 @app.route('/area')
 def area():
-    return render_template('area.html')
+    areas = obtener_areas()
+    return render_template('area.html', areas=areas)
 
+@app.route('/area/<area_nombre>')
+def area_detalle(area_nombre):
+    resultados = [
+        {
+            "id": idx,
+            "titulo": titulo,
+            "h_index": data.get("h_index", "N/A"),
+            "url": data.get("url", "#")
+        }
+        for idx, (titulo, data) in enumerate(scimago_data.items())
+        if area_nombre in data.get("subject_area", [])
+    ]
+    areas = obtener_areas()
+    return render_template('area.html', area_nombre=area_nombre, resultados=resultados, areas=areas)
+
+
+# Ruta de créditos
 @app.route('/creditos')
 def creditos():
     return render_template('creditos.html')
