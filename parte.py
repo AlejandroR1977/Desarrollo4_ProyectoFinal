@@ -15,9 +15,6 @@ revistas = {
   'academia': {'areas': ['CIENCIASECO', 'CIENCIASSOC'], 'catalogos': ['SCOPUS']},
   'academia-revista latinoamericana de administracion': {'areas': ['CIENCIASECO', 'ING'], 'catalogos': ['JCR']},
   'academic leadership': {'areas': ['CIENCIASECO', 'CIENCIASSOC'], 'catalogos': ['SCOPUS']},
-  'academy of accounting and financial studies journal': {'areas': ['CIENCIASECO'], 'catalogos': ['SCOPUS']},
-  'academy of banking studies journal': {'areas': ['CIENCIASECO'], 'catalogos': ['SCOPUS']},
-  'academy of entrepreneurship journal': {'areas': ['CIENCIASECO'], 'catalogos': ['SCOPUS']},
   'academy of management annals': {'areas': ['CIENCIASECO', 'ING'], 'catalogos': ['JCR', 'SCOPUS']},
   'academy of management journal': {'areas': ['CIENCIASECO', 'ING'], 'catalogos': ['JCR', 'SCOPUS']},
   #...
@@ -30,7 +27,6 @@ revistas = {
   'acta oeconomica': {'areas': ['CIENCIASECO'], 'catalogos': ['JCR', 'SCOPUS']},
   'action learning: research and practice': {'areas': ['CIENCIASECO', 'CIENCIASSOC'], 'catalogos': ['SCOPUS']},
   'action research': {'areas': ['CIENCIASECO', 'ING', 'CIENCIASSOC'], 'catalogos': ['JCR', 'SCOPUS']},
-  'actual problems of economics': {'areas': ['CIENCIASECO'], 'catalogos': ['JCR', 'SCOPUS']},
   #...
   'african development review-revue africaine de developpement': {'areas': ['CIENCIASECO', 'ING'], 'catalogos': ['JCR']},
   'african finance journal': {'areas': ['CIENCIASECO'], 'catalogos': ['SCOPUS']},
