@@ -118,14 +118,35 @@
     </div>
 </nav>
 
-        <h1 class="my-4">Buscar revista científica</h1>
-        <form method="GET" action="/resultados_busqueda">
-            <div class="form-group">
-                <label for="query">Ingrese el nombre o palabras clave de la revista</label>
-                <input type="text" class="form-control" id="query" name="query" placeholder="Ejemplo: Ingeniería" required>
+<body>
+    <div class="container py-4">
+        <h1 class="mb-4">Búsqueda de Revistas</h1>
+        <form action="{{ url_for('busqueda') }}" method="get">
+            <div class="mb-3">
+                <input type="text" name="termino" placeholder="Buscar revista o ISSN">
             </div>
             <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
+
+        <div class="mt-4">
+            {% if resultados %}
+                <h2>Resultados de la búsqueda:</h2>
+                <ul class="list-group">
+                    {% for revista in resultados %}
+                        <li class="list-group-item">
+                            <a href="{{ revista.url }}" target="_blank">{{ revista.title }}</a>
+                            <p><strong>ISSN:</strong> {{ revista.issn }}</p>
+                            <p><strong>Área:</strong> {{ revista.subject_area }}</p>
+                            <p><strong>Editor:</strong> {{ revista.publisher }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No se encontraron resultados para el término ingresado.</p>
+            {% endif %}
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -124,21 +124,19 @@ def explorar():
 # Ruta de búsqueda
 @app.route('/busqueda', methods=['GET'])
 def busqueda():
-    query = request.args.get('query', '').strip().lower()
+    termino = request.args.get('termino', '').lower()
     resultados = []
 
-    if query:
-        for titulo, data in scimago_data.items():
-            if query in titulo.lower():
-                resultados.append({
-                    "titulo": titulo,
-                    "h_index": data["h_index"],
-                    "url": data["url"],
-                    "areas": data["subject_area"],
-                    "catalogo": data.get("publisher", "Desconocido")
-                })
+    if termino:
+        for titulo, revista in scimago_data.items():
+            titulo_lower = titulo.lower()
+            issn = revista.get('issn', '').lower()
 
-    return render_template('busqueda.html', query=query, resultados=resultados)
+            if termino in titulo_lower or termino in issn:
+                resultados.append({"title": titulo, **revista})
+
+    return render_template('busqueda.html', resultados=resultados)
+
 
 # Ruta de catálogos generales
 @app.route('/catalogos')
