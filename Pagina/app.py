@@ -68,10 +68,58 @@ def index():
         return redirect(url_for('login'))
     return render_template('index.html')
 
-# Ruta de exploración
-@app.route('/explorar')
+@app.route("/explorar")
 def explorar():
-    return render_template('explorar.html', revistas=scimago_data)
+    query = request.args.get("q", "").strip().lower()
+    area = request.args.get("area", "")
+    tipo = request.args.get("tipo", "")
+
+    # Convertir los datos del diccionario en lista de revistas con título incluido
+    revistas = [
+        {"title": titulo, **data}
+        for titulo, data in scimago_data.items()
+    ]
+
+    # Filtrado
+    revistas_filtradas = []
+    for r in revistas:
+        if query and query not in r["title"].lower():
+            continue
+        if area and area not in r.get("subject_area", []):
+            continue
+        if tipo and r.get("publication_type") != tipo:
+            continue
+        revistas_filtradas.append(r)
+
+    # Agrupar por letra inicial
+    revistas_por_letra = {}
+    for r in revistas_filtradas:
+        letra = r["title"][0].upper()
+        revistas_por_letra.setdefault(letra, []).append(r)
+
+    # Ordenar por letra
+    revistas_por_letra = dict(sorted(revistas_por_letra.items()))
+
+    # Obtener áreas y tipos únicos
+    areas = sorted({
+        area
+        for r in revistas
+        for area in r.get("subject_area", [])
+        if area
+    })
+
+    tipos = sorted({
+        r.get("publication_type")
+        for r in revistas
+        if r.get("publication_type")
+    })
+
+    return render_template(
+        "explorar.html",
+        revistas_por_letra=revistas_por_letra,
+        areas=areas,
+        tipos=tipos
+    )
 
 # Ruta de búsqueda
 @app.route('/busqueda', methods=['GET'])
